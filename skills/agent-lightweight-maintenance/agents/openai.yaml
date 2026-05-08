@@ -1,0 +1,6 @@
+interface:
+  display_name: "Agent Lightweight Maintenance"
+  short_description: "Break AI agent loops and keep handoffs light."
+  default_prompt: "Use $agent-lightweight-maintenance to stop repeated exploration, clean up stale context, identify the smallest next action, and produce a short handoff."
+policy:
+  allow_implicit_invocation: true
