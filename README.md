@@ -1,58 +1,48 @@
 # Agent Lightweight Maintenance
 
-A small Codex skill and AI coding agent workflow for breaking repeated agent loops, reducing context bloat, and preparing lightweight project handoffs.
+A lightweight maintenance skill for AI coding agents that get stuck in loops, over-read repositories, or carry stale project context.
 
-It is designed for moments when an AI coding agent keeps re-reading the same files, repeats broad plans, carries stale assumptions, or turns a small code edit into a long debugging session.
+Use it when a small edit turns into a long session, the agent keeps revisiting retired features, or a handoff needs to stay short enough for the next agent to act immediately.
 
-Use it when you need to stop the loop, identify the files that actually own the issue, and move forward with one small action plus one narrow verification command.
+## Before / After
 
-## Common Pain Points
+Before:
 
-- "My AI coding agent keeps looping on the same fix."
-- "A tiny text or UI change became a huge repository scan."
-- "The agent keeps inspecting generated output instead of source files."
-- "Old notes, stale assumptions, or retired features keep coming back."
-- "I need a short handoff before starting a new conversation."
-- "I want to slim an old project without deleting useful work."
+- The agent repeatedly scans the repository.
+- Generated output, screenshots, logs, or dependency folders get inspected again.
+- Retired features and old attempts keep returning as active context.
+- `progress.md`, `STATUS.md`, or the handoff file becomes a worklog.
 
-## What It Helps With
+After:
 
-- Stop repeated broad exploration.
-- Identify the files that actually own the current issue.
-- Separate current work from stale history.
-- Produce short handoffs for new conversations or collaborators.
-- Classify files as keep, archive, or drop before cleanup.
-- Run the narrowest useful verification instead of defaulting to full rebuilds.
+- The agent reads only project rules, source map, and current status if present.
+- It identifies the files that actually own the current issue.
+- It produces a Loop Break Summary.
+- It takes one smallest next action.
+- It runs one narrow verification command.
 
-## Good Fit
+## Use When
 
-- Codex sessions that feel context-heavy or repetitive.
-- Long-running coding conversations that need a reset.
-- Old projects that need lightweight recovery before new work.
-- Fast edit mode for small source changes.
-- Project handoffs where the next agent should not rediscover everything.
+- Your agent keeps repeating the same plan.
+- Small edits take too long.
+- Current status files become long worklogs.
+- A source map or project map is stale.
+- Generated output is being inspected instead of source files.
+- You need a lightweight handoff for a new conversation or collaborator.
+- You want to slim an old project without deleting useful work.
 
-## Not A Good Fit
-
-- Replacing normal debugging, tests, or code review.
-- Automatically deleting files without user approval.
-- Preserving every historical note as current project context.
-
-## Repository Layout
+## Sample Prompt
 
 ```text
-skills/
-  agent-lightweight-maintenance/
-    SKILL.md
-    agents/
-      openai.yaml
+Use $agent-lightweight-maintenance.
+
+We are in a loop. Stop editing and produce a Loop Break Summary.
+
+Read only project rules, a source map, and a current status or handoff file if present.
+Identify the files that actually own the current issue.
+Give me one smallest next action and one narrow verification command.
+Do not inspect generated output or large asset folders unless directly required.
 ```
-
-The skill itself is intentionally limited to `SKILL.md` and `agents/openai.yaml`. This keeps the installed skill lightweight.
-
-## Suggested GitHub Topics
-
-`codex`, `codex-skill`, `ai-coding-agent`, `agent-workflow`, `developer-tools`, `context-management`, `handoff`, `debugging-workflow`
 
 ## Install Locally
 
@@ -68,17 +58,16 @@ Then start a new Codex session and invoke it with:
 Use $agent-lightweight-maintenance.
 ```
 
-## Example Prompt
+## Repository Layout
 
 ```text
-Use $agent-lightweight-maintenance.
-
-This project feels stuck in a loop. Stop broad exploration, read only the lightweight project map/status files if present, identify the owning files, and give me one smallest next action plus one narrow verification command.
+skills/
+  agent-lightweight-maintenance/
+    SKILL.md
+    agents/
+      openai.yaml
 ```
 
-## Publishing Checklist
+## Suggested GitHub Topics
 
-- Keep the skill vendor-neutral and project-neutral.
-- Do not include personal paths, project names, or private workflow assumptions.
-- Keep generated output, screenshots, logs, and dependency folders out of the repo.
-- Keep the installed skill folder small: `SKILL.md` plus optional `agents/openai.yaml`.
+`codex`, `codex-skill`, `ai-coding-agent`, `agent-workflow`, `developer-tools`, `context-management`, `handoff`, `debugging-workflow`
